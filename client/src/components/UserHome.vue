@@ -20,13 +20,13 @@
             <h4 class="modal-title" id="myModalLabel">New Article Form</h4>
           </div>
           <div class="modal-body">
-              <form>
+              <form @submit.prevent="KirimArtikel(newArticle)">
                 <label>Judul</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" v-model="newArticle.title">
                 <label>Konten</label>
-                <textarea name="name" rows="8" cols="80" class="form-control"></textarea>
+                <textarea name="name" rows="8" cols="80" class="form-control" v-model="newArticle.content"></textarea>
                 <label>Kategori</label>
-                <select class="" name="" class="form-control">
+                <select class="" name="" class="form-control" v-model="newArticle.category">
                   <option value="berita">Berita</option>
                   <option value="tutorial">Tutorial</option>
                   <option value="teknologi">Teknologi</option>
@@ -46,7 +46,13 @@ export default {
   data () {
     return {
       name: localStorage.getItem('username'),
-      userPost: []
+      userPost: [],
+      newArticle: {
+        title: '',
+        content: '',
+        category: '',
+        author: localStorage.getItem('id')
+      }
     }
   },
   methods: {
