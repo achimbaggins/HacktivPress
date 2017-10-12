@@ -65,6 +65,17 @@ export default {
     doLogout () {
       localStorage.clear()
       this.$router.push('/')
+    },
+    KirimArtikel (data) {
+      this.$axios.post('articles', data)
+      .then(({data}) => {
+        this.userPost.unshift(data)
+        this.$swal(
+          'Sukses Kirim Artikel',
+          'weldone guys!',
+          'success'
+        )
+      })
     }
   },
   created () {
