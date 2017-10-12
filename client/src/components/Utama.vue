@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="container">
     <Navbar/>
-    <router-view/>
+    <router-view :allDataPost="allPost"></router-view>
   </div>
 </template>
 
@@ -18,8 +18,9 @@ export default {
   },
   methods: {
     getallpost () {
-      this.$axios.get('/articles')
+      this.$axios.get('/')
       .then(({data}) => {
+        console.log('datanya', data);
         this.allPost = data
       })
     }

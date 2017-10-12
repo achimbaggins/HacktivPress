@@ -1,6 +1,6 @@
 <template lang="html">
-  <div class="container">
-    <div class="list-group text-left" v-for="(post, index) in allPost">
+  <div class="">
+    <div class="list-group" v-for="(post, index) in byCat">
       <router-link :to="'/read/'+ post.slug" class="list-group-item">
         <h4 class="list-group-item-heading">{{ post.title }}</h4>
       </router-link>
@@ -10,23 +10,27 @@
 
 <script>
 export default {
-  props: ['allDataPost'],
+  props: ['cat'],
   data () {
     return {
-      allPost: []
+      byCat: []
     }
   },
   methods: {
-    getallpost () {
-      this.$axios.get('/')
+    getbycat (cat) {
+      this.$axios.get(`category/${cat}`)
       .then(({data}) => {
-        console.log('datanya', data);
-        this.allPost = data
+        this.byCat = data
       })
     }
   },
   created () {
-    this.getallpost()
+    this.getbycat(this.cat)
+  },
+  watch: {
+    cat () {
+      this.getbycat(this.cat)
+    }
   }
 }
 </script>

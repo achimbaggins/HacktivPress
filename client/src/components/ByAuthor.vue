@@ -1,6 +1,6 @@
 <template lang="html">
-  <div class="container">
-    <div class="list-group text-left" v-for="(post, index) in allPost">
+  <div class="">
+    <div class="list-group" v-for="(post, index) in byAuthor">
       <router-link :to="'/read/'+ post.slug" class="list-group-item">
         <h4 class="list-group-item-heading">{{ post.title }}</h4>
       </router-link>
@@ -10,23 +10,27 @@
 
 <script>
 export default {
-  props: ['allDataPost'],
+  props: ['name'],
   data () {
     return {
-      allPost: []
+      byAuthor: []
     }
   },
   methods: {
-    getallpost () {
-      this.$axios.get('/')
+    getbycat (name) {
+      this.$axios.get(`author/${name}`)
       .then(({data}) => {
-        console.log('datanya', data);
-        this.allPost = data
+        this.byAuthor = data
       })
     }
   },
   created () {
-    this.getallpost()
+    this.getbycat(this.name)
+  },
+  watch: {
+    name () {
+      this.getbycat(this.name)
+    }
   }
 }
 </script>
