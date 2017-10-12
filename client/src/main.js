@@ -3,6 +3,15 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import axios from 'axios'
+import VueSweetAlert from 'vue-sweetalert'
+
+
+Vue.prototype.$axios = axios.create({
+  baseURL: 'http://localhost:3000'
+})
+
+Vue.use(VueSweetAlert)
 
 Vue.config.productionTip = false
 
