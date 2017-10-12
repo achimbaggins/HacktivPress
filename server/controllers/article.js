@@ -1,4 +1,5 @@
 const Article = require('../models/Article');
+const User = require('../models/User');
 const achimSlug = require('achim-slug');
 
 var all = (req, res) => {
@@ -36,10 +37,16 @@ var getByCat = (req, res) => {
 }
 
 var getByAuthor = (req, res) => {
-  Article.find({author:req.params.name})
-  .populate('author', 'username')
-  .then(result => res.send(result))
-  .catch(err => res.send('halaman tak tersedia'))
+  User.find({username: req.params.author})
+  .then(result => {
+    if(result.length > 0){
+      Article.find({author: result[0]._id})
+      .populate('author', 'username')
+      .then(ok => res.send(ok))
+    } else {
+      res.send('data tidak ditemukan')
+    }
+  })
 }
 
 var update = (req, res) => {
