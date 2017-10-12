@@ -4,10 +4,11 @@
     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myNewArticle">Add New Article</button>
     <button type="button" class="btn btn-danger" @click="doLogout">Logout</button>
     <ul class="list-group text-left" >
-      <li class="list-group-item" v-for="post in userPost">
-        <span class="badge">Delete</span>
+      <li class="list-group-item" v-for="(post, index) in userPost">
+        <span class="badge" @click="removeMe(post._id, index)">Delete</span>
         <span class="badge">Edit</span>
-        <b>{{post.title}}</b>
+        <router-link :to="'/read/'+ post.slug">
+        <b>{{post.title}}</b></router-link>
       </li>
     </ul>
 
@@ -76,6 +77,19 @@ export default {
           'success'
         )
       })
+    },
+    removeMe (id, idx) {
+      if(window.confirm("Yakin mau hapus?")){
+        this.$axios.delete(`articles/${id}`)
+        .then(ok => {
+          this.userPost.splice(idx,1)
+          this.$swal(
+            'Sukses Delete Artikel',
+            'weldone guys!',
+            'success'
+          )
+        })
+      }
     }
   },
   created () {
