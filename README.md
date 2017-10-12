@@ -27,6 +27,7 @@ Path | Keterangan
 /category/:cat | Halaman Filter artikel berdasarkan Kategori
 /author/:name | Halaman filter artikel berdasarkan author
 /dashboard | Halaman dashboard untuk user & Pada halaman ini user juga bisa menambahkan artikel, delete dan update artikel yang pernah dipostingnya
+/dashboard/add-new | Halaman tambah new post
 
 #### Struktur Backend
 Path | Keterangan
