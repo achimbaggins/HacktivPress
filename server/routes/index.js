@@ -1,9 +1,11 @@
 var express = require('express');
 var router = express.Router();
+const userControl = require('../controllers/user')
+const articleControl = require('../controllers/article')
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+router.get('/', articleControl.all);
+router.get('/category/:cat', articleControl.getByCat)
+router.post('/register', userControl.register)
+router.post('/login', userControl.login)
 
 module.exports = router;
