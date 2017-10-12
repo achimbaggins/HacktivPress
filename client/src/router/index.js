@@ -6,6 +6,7 @@ import Detail from '@/components/Detail'
 import Dashboard from '@/components/Dashboard'
 import ByCategory from '@/components/ByCategory'
 import ByAuthor from '@/components/ByAuthor'
+import UserHome from '@/components/UserHome'
 
 Vue.use(Router)
 
@@ -38,13 +39,11 @@ export default new Router({
         },
         {
           path: 'dashboard/',
-          component: Dashboard,
-          children: [
-            {
-              path: '',
-              component: Allpost
-            }
-          ]
+          component: Dashboard
+        },
+        {
+          path: 'dashboard/home/',
+          component: UserHome
         }
       ]
     }

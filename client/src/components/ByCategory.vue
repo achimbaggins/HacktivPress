@@ -1,6 +1,9 @@
 <template lang="html">
   <div class="">
-    <div class="list-group" v-for="(post, index) in byCat">
+    <div class="" v-if="byCat.length == 0">
+      mohon maaf belum ada artikel untuk <b>{{cat}}</b>
+    </div>
+    <div class="list-group" v-for="(post, index) in byCat" v-else>
       <router-link :to="'/read/'+ post.slug" class="list-group-item">
         <h4 class="list-group-item-heading">{{ post.title }}</h4>
       </router-link>
